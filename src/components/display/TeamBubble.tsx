@@ -29,7 +29,7 @@ export default function TeamBubble({ team, onClick, isJustAdvanced }: TeamBubble
       >
         {team.emoji}
       </div>
-      <span className="text-white/80 text-[10px] font-medium text-center leading-tight max-w-[52px] truncate">
+      <span className="text-gray-700 text-[10px] font-medium text-center leading-tight max-w-[52px] truncate">
         {team.name.replace(/^Equipe\s+/i, '')}
       </span>
     </motion.button>
