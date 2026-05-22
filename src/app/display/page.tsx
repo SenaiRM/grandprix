@@ -120,7 +120,7 @@ export default function DisplayPage() {
           {winners.length > 0 && (
             <div className="text-center">
               <div className="text-2xl font-black text-yellow-400 leading-none">{winners.length}</div>
-              <div className="text-white/40 text-[10px] uppercase tracking-widest">vencedor{winners.length > 1 ? 'es' : ''}</div>
+              <div className="text-white/40 text-[10px] uppercase tracking-widest">finalista{winners.length > 1 ? 's' : ''}</div>
             </div>
           )}
         </div>
