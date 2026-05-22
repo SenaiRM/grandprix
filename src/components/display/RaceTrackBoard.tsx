@@ -176,7 +176,7 @@ function OvalTrack({
 }) {
   return (
     <div
-      className="flex flex-col"
+      className="flex flex-col flex-1 min-h-0"
       style={{ background: '#1a1a2e', borderRadius: 64, padding: '10px 12px' }}
     >
       {/* Top road: label + arrows */}
@@ -187,8 +187,8 @@ function OvalTrack({
 
       {/* White infield */}
       <div
-        className="flex gap-1.5 px-3 py-2"
-        style={{ background: '#f5f7fb', borderRadius: 52, minHeight: 0 }}
+        className="flex flex-1 gap-1.5 px-3 py-2 min-h-0"
+        style={{ background: '#f5f7fb', borderRadius: 52 }}
       >
         {children}
       </div>
@@ -216,15 +216,15 @@ export default function RaceTrackBoard({ teams, justAdvancedId, onTeamClick }: R
         {/* TOP OVAL: phases 0, 1, 2 */}
         <OvalTrack
           topLabel={
-            <span className="text-[9px] font-black tracking-widest uppercase text-white/50">
-              🏎️ pista principal
+            <span className="text-xs font-black tracking-widest uppercase text-white drop-shadow">
+              🏎️ PISTA PRINCIPAL
             </span>
           }
           topArrowColors={topPhases.map((p) => p.color)}
           bottomArrowColors={['#F26522', '#F26522', '#F26522']}
           bottomLabel={
-            <span className="text-[9px] font-black tracking-widest uppercase text-white/30">
-              retorno
+            <span className="text-xs font-black tracking-widest uppercase text-white/70">
+              retorno ↩
             </span>
           }
         >
@@ -245,15 +245,15 @@ export default function RaceTrackBoard({ teams, justAdvancedId, onTeamClick }: R
         {/* BOTTOM OVAL: phases 3, 4, 5 */}
         <OvalTrack
           topLabel={
-            <span className="text-[9px] font-black tracking-widest uppercase text-white/50">
-              ⚡ segunda volta
+            <span className="text-xs font-black tracking-widest uppercase text-white drop-shadow">
+              ⚡ SEGUNDA VOLTA
             </span>
           }
           topArrowColors={bottomPhases.map((p) => p.color)}
           bottomArrowColors={['#F26522', '#F26522', '#F26522']}
           bottomLabel={
-            <span className="text-[9px] font-black tracking-widest uppercase text-white/30">
-              🏁 linha de chegada
+            <span className="text-xs font-black tracking-widest uppercase text-white drop-shadow">
+              🏁 LINHA DE CHEGADA
             </span>
           }
         >
