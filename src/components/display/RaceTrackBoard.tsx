@@ -98,7 +98,7 @@ function Podium({ teams, onTeamClick }: { teams: Team[]; onTeamClick: (team: Tea
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-      className="flex flex-col rounded-xl overflow-hidden flex-shrink-0"
+      className="flex flex-col rounded-xl overflow-hidden flex-shrink-0 flex-1"
       style={{
         width: 130,
         background: 'linear-gradient(160deg, #0d0d1a 0%, #1a1230 100%)',
@@ -271,10 +271,12 @@ export default function RaceTrackBoard({ teams, justAdvancedId, onTeamClick }: R
 
       </div>
 
-      {/* Right side: Pódio */}
-      <AnimatePresence>
-        <Podium teams={finalists} onTeamClick={onTeamClick} />
-      </AnimatePresence>
+      {/* Right side: Pódio — altura equivalente às duas ovals */}
+      <div className="self-stretch flex flex-col">
+        <AnimatePresence>
+          <Podium teams={finalists} onTeamClick={onTeamClick} />
+        </AnimatePresence>
+      </div>
 
     </div>
   );

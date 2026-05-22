@@ -59,7 +59,7 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
 
         {/* Right: icon circle */}
         <div
-          className="w-9 h-9 rounded-full flex items-center justify-center text-lg flex-shrink-0 shadow-sm"
+          className="w-16 h-16 rounded-full flex items-center justify-center text-4xl flex-shrink-0 shadow-sm"
           style={{ background: phase.color }}
         >
           {phase.emoji}
