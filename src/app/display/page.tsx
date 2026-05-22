@@ -76,29 +76,42 @@ export default function DisplayPage() {
 
       {/* Header */}
       <header
-        className="relative flex items-center px-6 py-2 flex-shrink-0 gap-6 bg-white"
+        className="relative flex items-center px-6 py-2 flex-shrink-0 bg-white"
         style={{ borderBottom: '2px solid #003087' }}
       >
-        {/* Logo / title */}
+        {/* Title block */}
         <div className="flex items-center gap-3 flex-shrink-0">
           <span className="text-3xl">🏎️</span>
           <div>
-            <div className="font-black font-display tracking-wider uppercase leading-none"
-              style={{ fontSize: '1.35rem', color: '#003087' }}
-            >
+            <div className="font-black font-display tracking-wider uppercase leading-none" style={{ fontSize: '1.3rem', color: '#003087' }}>
               Grand Prix <span style={{ color: '#F26522' }}>SENAI</span>
+              <span className="text-gray-400 font-semibold text-sm ml-2 normal-case tracking-normal">de Inovação</span>
             </div>
-            <div className="text-gray-400 text-xs tracking-widest uppercase mt-0.5">
-              de Inovação · Fac. Roberto Mange · 22–29 Mai 2026
+            <div className="text-[10px] text-gray-400 tracking-widest uppercase mt-0.5">
+              Fac. Roberto Mange · 22–29 Mai 2026
             </div>
           </div>
         </div>
 
         {/* Separator */}
-        <div className="h-10 w-px bg-gray-200 flex-shrink-0" />
+        <div className="h-10 w-px bg-gray-200 mx-5 flex-shrink-0" />
+
+        {/* Tagline */}
+        <div className="flex-shrink-0">
+          <div className="font-black font-display text-xs tracking-widest uppercase leading-tight" style={{ color: '#003087' }}>
+            Uma Jornada. Muitos Desafios.{' '}
+            <span style={{ color: '#F26522' }}>Grandes Soluções.</span>
+          </div>
+          <div className="font-black font-display text-[10px] tracking-[0.18em] uppercase mt-0.5 text-gray-500">
+            Corra. <span style={{ color: '#F26522', fontStyle: 'italic' }}>Inove.</span> Transforme.
+          </div>
+        </div>
+
+        {/* Spacer */}
+        <div className="flex-1" />
 
         {/* Stats */}
-        <div className="flex items-center gap-6 flex-shrink-0">
+        <div className="flex items-center gap-5 flex-shrink-0">
           <div className="text-center">
             <div className="text-2xl font-black text-gray-900 leading-none">{totalTeams}</div>
             <div className="text-gray-400 text-[10px] uppercase tracking-widest">equipes</div>
@@ -115,32 +128,27 @@ export default function DisplayPage() {
           )}
         </div>
 
-        {/* Progress bar */}
-        <div className="flex-1 flex flex-col gap-1">
-          <div className="flex justify-between text-[10px] text-gray-400 uppercase tracking-widest">
-            <span>largada</span>
-            <span>progresso do circuito</span>
-            <span>linha de chegada</span>
-          </div>
+        {/* Separator */}
+        <div className="h-10 w-px bg-gray-200 mx-4 flex-shrink-0" />
+
+        {/* Progress + live */}
+        <div className="flex flex-col gap-1 w-40 flex-shrink-0">
           <div className="h-2 rounded-full overflow-hidden bg-gray-100">
             <div
               className="h-full rounded-full transition-all duration-1000"
               style={{
                 width: totalTeams > 0 ? `${(state.teams.reduce((s, t) => s + t.currentPhase, 0) / (totalTeams * 5)) * 100}%` : '0%',
                 background: 'linear-gradient(90deg, #003087, #F26522, #FFD700)',
-                boxShadow: '0 0 6px #F2652266',
               }}
             />
           </div>
-        </div>
-
-        {/* Live + admin */}
-        <div className="flex items-center gap-4 flex-shrink-0">
-          <div className="flex items-center gap-1.5 text-xs text-green-600">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            ao vivo
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1 text-[10px] text-green-600">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              ao vivo
+            </div>
+            <a href="/admin" className="text-gray-300 hover:text-gray-500 text-[10px] transition-colors">admin</a>
           </div>
-          <a href="/admin" className="text-gray-300 hover:text-gray-500 text-xs transition-colors">admin</a>
         </div>
       </header>
 
@@ -153,45 +161,32 @@ export default function DisplayPage() {
         />
       </main>
 
-      {/* "CORRA. INOVE. TRANSFORME." banner */}
-      <div
-        className="flex-shrink-0 flex items-center justify-center py-1.5 bg-white"
-        style={{ borderTop: '3px solid #F26522' }}
-      >
-        <p className="font-black font-display tracking-[0.2em] uppercase text-sm text-gray-900">
-          CORRA.{' '}
-          <span style={{ color: '#F26522', fontStyle: 'italic' }}>INOVE.</span>
-          {' '}TRANSFORME.
-        </p>
+      {/* Colored stripe bar */}
+      <div className="h-1.5 w-full flex-shrink-0 flex">
+        {['#003087', '#F26522', '#16a34a', '#7c3aed', '#dc2626', '#F26522'].map((c, i) => (
+          <div key={i} className="flex-1" style={{ background: c }} />
+        ))}
       </div>
 
-      {/* Sponsors bar */}
+      {/* Dark sponsors footer */}
       <div
-        className="flex-shrink-0 flex items-center justify-between px-8 py-1.5 bg-white"
-        style={{ borderTop: '1px solid #e5e7eb' }}
+        className="flex-shrink-0 flex items-center justify-between px-8 py-2"
+        style={{ background: '#001a4d' }}
       >
         <div className="flex items-center gap-4">
-          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Apoio:</span>
-          <span className="font-black text-sm tracking-wide" style={{ color: '#003087' }}>VITAMEDIC</span>
-          <span className="text-gray-300">|</span>
-          <span className="font-black text-sm tracking-wide" style={{ color: '#003087' }}>SEBRAE</span>
+          <span className="text-yellow-400 text-lg">🏆</span>
+          <span className="text-white/40 text-[10px] font-semibold uppercase tracking-widest">Apoio:</span>
+          <span className="font-black text-sm tracking-wide text-white">VITAMEDIC</span>
+          <div className="h-5 w-px bg-white/20" />
+          <span className="font-black text-sm tracking-wide text-white">SEBRAE</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">Realização:</span>
-          <span className="font-black text-base tracking-wider" style={{ color: '#003087' }}>
+          <span className="text-white/40 text-[10px] font-semibold uppercase tracking-widest">Realização:</span>
+          <span className="font-black text-base tracking-wider text-white">
             SENAI<span style={{ color: '#F26522' }}>.</span>
           </span>
         </div>
       </div>
-
-      {/* Bottom checkered stripe */}
-      <div
-        className="h-1.5 w-full flex-shrink-0"
-        style={{
-          backgroundImage: 'repeating-conic-gradient(#F26522 0% 25%, #003087 0% 50%)',
-          backgroundSize: '12px 6px',
-        }}
-      />
 
       <TeamMemberPopup
         team={state.selectedTeam}

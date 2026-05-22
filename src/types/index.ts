@@ -5,6 +5,7 @@ export interface Phase {
   key: string;
   label: string;
   subtitle: string;
+  description: string;
   emoji: string;
   color: string;
 }
