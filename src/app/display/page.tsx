@@ -88,7 +88,7 @@ export default function DisplayPage() {
               <span className="text-gray-400 font-semibold text-sm ml-2 normal-case tracking-normal">de Inovação</span>
             </div>
             <div className="text-[10px] text-gray-400 tracking-widest uppercase mt-0.5">
-              Fac. Roberto Mange · 22–29 Mai 2026
+              Fac. SENAI Roberto Mange · 22–29 Mai 2026
             </div>
           </div>
         </div>
