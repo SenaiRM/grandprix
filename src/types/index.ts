@@ -4,6 +4,7 @@ export interface Phase {
   index: PhaseIndex;
   key: string;
   label: string;
+  subtitle: string;
   emoji: string;
   color: string;
 }

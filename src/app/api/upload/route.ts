@@ -28,10 +28,21 @@ export async function POST(req: Request) {
   const buffer = Buffer.from(await file.arrayBuffer());
   const dataUri = `data:${file.type};base64,${buffer.toString('base64')}`;
 
-  const result = await cloudinary.uploader.upload(dataUri, {
-    folder: 'grandprix',
-    transformation: [{ width: 400, height: 400, crop: 'fill', gravity: 'face' }],
-  });
+  if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+    return NextResponse.json(
+      { error: 'Cloudinary não configurado — adicione CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY e CLOUDINARY_API_SECRET nas variáveis do Railway' },
+      { status: 500 }
+    );
+  }
 
-  return NextResponse.json({ url: result.secure_url });
+  try {
+    const result = await cloudinary.uploader.upload(dataUri, {
+      folder: 'grandprix',
+      transformation: [{ width: 400, height: 400, crop: 'fill', gravity: 'face' }],
+    });
+    return NextResponse.json({ url: result.secure_url });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : 'Erro no upload';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }

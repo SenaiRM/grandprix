@@ -22,9 +22,16 @@ export default function PhotoUpload({ value, onChange, label }: PhotoUploadProps
       const form = new FormData();
       form.append('file', file);
       const res = await fetch('/api/upload', { method: 'POST', body: form });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-      onChange(data.url);
+
+      let data: { url?: string; error?: string } = {};
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error('Erro no servidor — verifique as credenciais do Cloudinary nas variáveis do Railway');
+      }
+
+      if (!res.ok) throw new Error(data.error ?? 'Erro no upload');
+      if (data.url) onChange(data.url);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Erro no upload');
     } finally {
@@ -34,7 +41,7 @@ export default function PhotoUpload({ value, onChange, label }: PhotoUploadProps
 
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-sm text-slate-300">{label}</span>
+      <span className="text-sm text-slate-300">{label} <span className="text-slate-500 text-xs">(opcional)</span></span>
       <div
         className="flex items-center gap-3 p-2 rounded-lg border border-slate-600 bg-slate-800 cursor-pointer hover:border-orange-500 transition-colors"
         onClick={() => inputRef.current?.click()}
@@ -56,14 +63,26 @@ export default function PhotoUpload({ value, onChange, label }: PhotoUploadProps
             <span className="text-sm text-slate-400">Clique para enviar foto</span>
           )}
         </div>
+        {value && (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); onChange(''); }}
+            className="text-slate-500 hover:text-red-400 text-lg leading-none flex-shrink-0 px-1"
+            title="Remover foto"
+          >
+            ✕
+          </button>
+        )}
       </div>
-      {error && <span className="text-xs text-red-400">{error}</span>}
+      {error && (
+        <span className="text-xs text-red-400 leading-snug">{error}</span>
+      )}
       <input
         ref={inputRef}
         type="file"
         accept="image/*"
         className="hidden"
-        onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); }}
+        onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFile(f); e.target.value = ''; }}
       />
     </div>
   );
