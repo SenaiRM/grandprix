@@ -17,77 +17,74 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: checkpointNumber * 0.07, type: 'spring', stiffness: 260, damping: 20 }}
+      transition={{ delay: checkpointNumber * 0.06, type: 'spring', stiffness: 260, damping: 22 }}
       className="relative flex flex-col flex-1 bg-white overflow-hidden"
       style={{
         border: `2px solid ${phase.color}`,
-        borderRadius: 12,
+        borderRadius: 10,
         boxShadow: isFinal
-          ? `0 0 18px ${phase.color}55, 0 2px 12px rgba(0,0,0,0.12)`
-          : '0 2px 12px rgba(0,0,0,0.10)',
-        minHeight: 140,
+          ? `0 0 16px ${phase.color}44, 0 2px 10px rgba(0,0,0,0.10)`
+          : '0 2px 10px rgba(0,0,0,0.08)',
+        minHeight: 120,
       }}
     >
       {/* Top color stripe */}
       <div className="h-1 w-full flex-shrink-0" style={{ background: phase.color }} />
 
-      {/* Phase header */}
-      <div className="px-2 pt-2 pb-1 flex flex-col items-center">
-        {/* Icon circle */}
+      {/* Header row: number + name + icon */}
+      <div className="flex items-start justify-between px-2 pt-2 gap-1">
+        {/* Left: number + name block */}
+        <div className="flex items-start gap-1.5 min-w-0">
+          {/* Checkpoint number */}
+          <span
+            className="font-black leading-none flex-shrink-0"
+            style={{ fontSize: '1.75rem', color: phase.color, lineHeight: 1 }}
+          >
+            {checkpointNumber}
+          </span>
+          <div className="min-w-0 pt-0.5">
+            <div
+              className="font-black font-display uppercase leading-tight"
+              style={{ fontSize: '0.72rem', color: phase.color, letterSpacing: '0.04em' }}
+            >
+              {phase.label}
+            </div>
+            <div className="text-gray-600 uppercase font-semibold leading-tight" style={{ fontSize: '0.6rem', letterSpacing: '0.03em' }}>
+              {phase.subtitle}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: icon circle */}
         <div
-          className="w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-sm mb-1"
+          className="w-9 h-9 rounded-full flex items-center justify-center text-lg flex-shrink-0 shadow-sm"
           style={{ background: phase.color }}
         >
           {phase.emoji}
         </div>
-
-        {/* Checkpoint number badge */}
-        <div
-          className="w-5 h-5 rounded-full flex items-center justify-center text-[11px] font-black text-white -mt-1 mb-1 shadow-sm"
-          style={{ background: phase.color, border: '2px solid white' }}
-        >
-          {checkpointNumber}
-        </div>
-
-        {/* Phase name */}
-        <div className="font-black font-display text-[11px] tracking-wide uppercase leading-tight text-gray-900 text-center">
-          {phase.label}
-        </div>
-
-        {/* Subtitle */}
-        <div className="text-[9px] leading-tight mt-0.5 text-center" style={{ color: phase.color }}>
-          {phase.subtitle}
-        </div>
-
-        {/* Count badge */}
-        <div
-          className="inline-flex items-center justify-center mt-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold"
-          style={{
-            background: `${phase.color}18`,
-            color: phase.color,
-            border: `1px solid ${phase.color}44`,
-          }}
-        >
-          {teams.length} {teams.length === 1 ? 'equipe' : 'equipes'}
-        </div>
       </div>
 
+      {/* Description */}
+      <p className="px-2 pt-1 pb-1 text-gray-500 leading-snug" style={{ fontSize: '0.62rem' }}>
+        {phase.description}
+      </p>
+
       {/* EQUIPES divider */}
-      <div className="mx-2 flex items-center gap-1.5 my-1">
-        <div className="flex-1 h-px" style={{ background: `${phase.color}30` }} />
+      <div className="mx-2 flex items-center gap-1.5 mb-1">
+        <div className="flex-1 h-px" style={{ background: `${phase.color}40` }} />
         <div
-          className="text-[8px] font-black tracking-widest uppercase"
-          style={{ color: `${phase.color}99` }}
+          className="font-black tracking-widest uppercase"
+          style={{ fontSize: '0.6rem', color: phase.color }}
         >
           equipes
         </div>
-        <div className="flex-1 h-px" style={{ background: `${phase.color}30` }} />
+        <div className="flex-1 h-px" style={{ background: `${phase.color}40` }} />
       </div>
 
       {/* Teams */}
-      <div className="flex flex-wrap justify-center gap-1.5 p-2 flex-1 content-start">
+      <div className="flex flex-wrap justify-center gap-1.5 px-2 pb-2 flex-1 content-start">
         <AnimatePresence mode="popLayout">
           {teams.map((team) => (
             <TeamBubble
@@ -99,7 +96,7 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
           ))}
         </AnimatePresence>
         {teams.length === 0 && (
-          <div className="text-gray-300 text-[10px] text-center self-center w-full italic pt-2">
+          <div className="text-gray-300 text-[10px] text-center self-center w-full italic pt-1">
             aguardando...
           </div>
         )}
@@ -109,8 +106,8 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
       {isFinal && (
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          style={{ borderRadius: 10, border: `2px solid ${phase.color}` }}
-          animate={{ opacity: [0.5, 1, 0.5] }}
+          style={{ borderRadius: 8, border: `2px solid ${phase.color}` }}
+          animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ repeat: Infinity, duration: 2 }}
         />
       )}
