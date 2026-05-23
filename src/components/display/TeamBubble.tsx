@@ -24,12 +24,16 @@ export default function TeamBubble({ team, onClick, isJustAdvanced }: TeamBubble
       title={`Ver ${team.name}`}
     >
       <div
-        className="w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-lg transition-shadow group-hover:shadow-orange-500/40 group-hover:shadow-xl"
-        style={{ background: 'linear-gradient(135deg, #F26522 0%, #c94f12 100%)' }}
+        className="w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-xl transition-all group-hover:shadow-orange-400/60 group-hover:shadow-2xl"
+        style={{
+          background: 'radial-gradient(circle at 35% 35%, #ff8c42, #c94f12 70%, #8b2a00)',
+          border: '2px solid rgba(255,255,255,0.15)',
+          boxShadow: '0 4px 16px rgba(242,101,34,0.5), inset 0 1px 0 rgba(255,255,255,0.2)',
+        }}
       >
         {team.emoji}
       </div>
-      <span className="text-gray-700 text-[10px] font-medium text-center leading-tight max-w-[52px] truncate">
+      <span className="text-gray-700 text-[11px] font-semibold text-center leading-tight max-w-[60px] truncate">
         {team.name.replace(/^Equipe\s+/i, '')}
       </span>
     </motion.button>
