@@ -180,11 +180,18 @@ export default function DisplayPage() {
           <div className="h-5 w-px bg-white/20" />
           <span className="font-black text-sm tracking-wide text-white">SEBRAE</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-white/40 text-[10px] font-semibold uppercase tracking-widest">Realização:</span>
-          <span className="font-black text-base tracking-wider text-white">
-            SENAI<span style={{ color: '#F26522' }}>.</span>
-          </span>
+        <div className="flex items-center gap-4">
+          <div className="flex flex-col items-end">
+            <span className="text-white/40 text-[9px] font-semibold uppercase tracking-widest">Construção</span>
+            <span className="text-white/70 text-[10px] font-bold tracking-wide">Análise e Desenvolvimento de Sistemas</span>
+          </div>
+          <div className="h-8 w-px bg-white/20" />
+          <div className="flex items-center gap-3">
+            <span className="text-white/40 text-[10px] font-semibold uppercase tracking-widest">Realização:</span>
+            <span className="font-black text-base tracking-wider text-white">
+              SENAI<span style={{ color: '#F26522' }}>.</span>
+            </span>
+          </div>
         </div>
       </div>
 
