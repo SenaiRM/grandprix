@@ -206,6 +206,9 @@ export default function RaceTrackBoard({ teams, justAdvancedId, onTeamClick }: R
   const topPhases    = [PHASES[0], PHASES[1], PHASES[2]];
   const bottomPhases = [PHASES[3], PHASES[4], PHASES[5]];
   const finalists    = teams.filter((t) => t.currentPhase === 5);
+  const highestActivePhase = teams.length > 0
+    ? Math.max(...teams.map((t) => t.currentPhase))
+    : -1;
 
   return (
     <div className="flex-1 flex gap-2 px-3 py-2 min-h-0 overflow-hidden">
@@ -237,6 +240,7 @@ export default function RaceTrackBoard({ teams, justAdvancedId, onTeamClick }: R
               justAdvancedId={justAdvancedId}
               onTeamClick={onTeamClick}
               checkpointNumber={phase.index + 1}
+              isHotspot={phase.index === highestActivePhase && teams.filter((t) => t.currentPhase === phase.index).length > 0}
             />
           ))}
           <PitStopBanner />
@@ -265,6 +269,7 @@ export default function RaceTrackBoard({ teams, justAdvancedId, onTeamClick }: R
               justAdvancedId={justAdvancedId}
               onTeamClick={onTeamClick}
               checkpointNumber={phase.index + 1}
+              isHotspot={phase.index === highestActivePhase && teams.filter((t) => t.currentPhase === phase.index).length > 0}
             />
           ))}
         </OvalTrack>
