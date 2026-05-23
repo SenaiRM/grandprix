@@ -10,9 +10,10 @@ interface PhaseNodeProps {
   justAdvancedId: string | null;
   onTeamClick: (team: Team) => void;
   checkpointNumber: number;
+  isHotspot?: boolean;
 }
 
-export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, checkpointNumber }: PhaseNodeProps) {
+export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, checkpointNumber, isHotspot }: PhaseNodeProps) {
   const isFinal = phase.index === 5;
 
   return (
@@ -24,7 +25,9 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
       style={{
         border: `2px solid ${phase.color}`,
         borderRadius: 10,
-        boxShadow: isFinal
+        boxShadow: isHotspot
+          ? `0 0 20px ${phase.color}88, 0 2px 10px rgba(0,0,0,0.10)`
+          : isFinal
           ? `0 0 16px ${phase.color}44, 0 2px 10px rgba(0,0,0,0.10)`
           : '0 2px 10px rgba(0,0,0,0.08)',
         minHeight: 120,
@@ -54,6 +57,11 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
             <div className="text-gray-600 uppercase font-semibold leading-tight" style={{ fontSize: '0.6rem', letterSpacing: '0.03em' }}>
               {phase.subtitle}
             </div>
+            {isHotspot && (
+              <div className="flex items-center gap-0.5 mt-0.5 text-[9px] font-black text-red-500 leading-none">
+                🔥 frente da corrida
+              </div>
+            )}
           </div>
         </div>
 
@@ -110,6 +118,41 @@ export default function PhaseNode({ phase, teams, justAdvancedId, onTeamClick, c
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ repeat: Infinity, duration: 2 }}
         />
+      )}
+
+      {/* Hotspot: intense pulsing border glow */}
+      {isHotspot && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{ borderRadius: 8, border: `2px solid ${phase.color}` }}
+          animate={{ opacity: [0.5, 1, 0.5], boxShadow: [`inset 0 0 0px ${phase.color}00`, `inset 0 0 16px ${phase.color}44`, `inset 0 0 0px ${phase.color}00`] }}
+          transition={{ repeat: Infinity, duration: 1.4 }}
+        />
+      )}
+
+      {/* Hotspot: burning fuse along the bottom edge */}
+      {isHotspot && (
+        <div className="absolute bottom-0 left-0 right-0 h-[3px] overflow-visible rounded-b-[8px] pointer-events-none">
+          <motion.div
+            className="absolute left-0 top-0 h-full flex items-center justify-end"
+            animate={{ width: ['100%', '0%'] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'linear', repeatDelay: 0.4 }}
+            style={{ background: `linear-gradient(90deg, ${phase.color}55, ${phase.color})` }}
+          >
+            {/* Spark at the burning tip */}
+            <div
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: '50%',
+                flexShrink: 0,
+                marginRight: -5,
+                background: '#fff',
+                boxShadow: `0 0 6px 3px ${phase.color}, 0 0 14px 5px #fffa`,
+              }}
+            />
+          </motion.div>
+        </div>
       )}
     </motion.div>
   );
