@@ -31,15 +31,15 @@ export default function TeamBubble({ team, onClick, isJustAdvanced }: TeamBubble
       title={`Ver ${team.name}`}
     >
       <div
-        className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl transition-all group-hover:shadow-orange-400/60 group-hover:shadow-2xl"
+        className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all group-hover:shadow-orange-400/60 group-hover:shadow-xl"
         style={{
           background: 'radial-gradient(circle at 35% 35%, #ff8c42, #c94f12 70%, #8b2a00)',
           border: '2px solid rgba(255,255,255,0.15)',
-          boxShadow: '0 4px 16px rgba(242,101,34,0.5), inset 0 1px 0 rgba(255,255,255,0.2)',
+          boxShadow: '0 3px 10px rgba(242,101,34,0.5), inset 0 1px 0 rgba(255,255,255,0.2)',
         }}
       >
         <motion.span
-          className="text-3xl leading-none select-none"
+          className="text-2xl leading-none select-none"
           animate={{ scale: [1, 1.4, 0.85, 1.15, 1], rotate: [0, -14, 10, -5, 0] }}
           transition={{
             duration: 0.55,
@@ -52,7 +52,7 @@ export default function TeamBubble({ team, onClick, isJustAdvanced }: TeamBubble
           {team.emoji}
         </motion.span>
       </div>
-      <span className="text-gray-700 text-[11px] font-semibold text-center leading-tight max-w-[60px] truncate">
+      <span className="text-gray-700 text-[10px] font-semibold text-center leading-tight max-w-[52px] truncate">
         {team.name.replace(/^Equipe\s+/i, '')}
       </span>
     </motion.button>
